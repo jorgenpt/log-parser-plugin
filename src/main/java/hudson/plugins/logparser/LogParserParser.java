@@ -150,7 +150,7 @@ public class LogParserParser {
 		// write styles for log body
         final String styles = "<style>\n"
 			+ "  body {margin-left:.5em; }\n"
-			+ "  pre {font-family: Consolas, \"Courier New\"; word-wrap: break-word; }\n"
+			+ "  pre {font-family: Consolas, \"Courier New\"; word-wrap: break-word; white-space: pre-wrap; }\n"
 			+ "  pre span {word-wrap: break-word; } \n"
 			+ "</style>\n";
         writer.write(styles);
