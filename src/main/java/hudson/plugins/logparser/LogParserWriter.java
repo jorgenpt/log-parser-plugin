@@ -63,11 +63,21 @@ public final class LogParserWriter {
                 + "\t\telement.display == 'none' ? element.display='block' : element.display='none';\n"
                 + "\t}\n" + "</script>\n";
 
+        final String styles =
+            "<style>\n"
+            + "    ul {margin-left: 0; padding-left: 1em;}\n"
+            + "    ul li {font-size: small; text-overflow: ellipsis; margin-top: .5em; }\n"
+            + "    ul li a:link {text-decoration: none;}\n"
+            + "    ul li:hover a:link {text-decoration: underline;}\n"
+            + "</style>\n";
+
         final BufferedWriter writer = new BufferedWriter(new FileWriter(
                 buildRefPath));
         // Hudson stylesheets
         writer.write(LogParserConsts.getHtmlOpeningTags()); 
         writer.write(refStart); // toggle links javascript
+        writer.write(styles);
+		
         // Write Errors
         writeLinks(writer, LogParserConsts.ERROR, headerForSection,
                 statusCountPerSection, iconTable, linkListDisplay,
@@ -119,16 +129,6 @@ public final class LogParserWriter {
 
         final String hudsonRoot = Jenkins.get().getRootUrl();
         final String iconLocation = String.format("%s/images/16x16/", Functions.getResourcePath());
-		
-        final String styles = 
-            "<style>\n" 
-            + "    ul {margin-left: 0; padding-left: 1em;}\n"
-            + "    ul li {font-size: small; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; margin-top: .5em; }\n"
-            + "    ul li:hover {white-space: normal;}\n"
-            + "    ul li a:link {text-decoration: none;}\n"
-            + "    ul li:hover a:link {text-decoration: underline;}\n"
-            + "</style>\n";
-        writer.write(styles);
 		
         final String linksStart = "<img src=\"" + hudsonRoot + "/" + iconLocation + statusIcon
                 + "\" style=\"margin: 2px;\" width=\"24\" alt=\"" + linkListDisplayStr + " Icon\" height=\"24\" />\n"
